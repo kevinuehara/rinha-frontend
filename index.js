@@ -6,9 +6,9 @@ const loader = document.getElementById("loader");
 const output = document.getElementById("output");
 const more = document.getElementById("more");
 
-const worker = new Worker("./worker.min.js");
+const worker = new Worker("./worker.js");
 
-document.getElementById("file").addEventListener("change", async (e) => {
+document.getElementById("file").addEventListener("change", (e) => {
   loader.style.display = 'block';
   const file = e.target.files[0];
   if (!file) return;
@@ -58,9 +58,7 @@ const handleMessage = (data) => {
   }
 };
 
-
-
-const observer = new IntersectionObserver((entries) => {
+const observerIntersection = new IntersectionObserver((entries) => {
   if (entries[0].isIntersecting) {
     worker.postMessage({
       type: "more",
@@ -68,7 +66,7 @@ const observer = new IntersectionObserver((entries) => {
   }
 });
 
-observer.observe(more);
+observerIntersection.observe(more);
 
 function createStructure(json) {
   const keys = Object.keys(json);
