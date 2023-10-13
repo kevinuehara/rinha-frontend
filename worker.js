@@ -15,34 +15,37 @@ onmessage = ({ data }) => {
   }
 };
 
-const load = (file) => {
+function load(file) {
   try {
     json = JSON.parse(new FileReaderSync().readAsText(file));
     fileName = file.name;
   } catch (err) {
+    console.log(err);
     postMessage({ isValid: false, json: null, fileName: file.name });
     return;
   }
-  
+
   next();
 }
 
-const next = (keyName = "root") => {
+function next(keyName = "root") {
   const keyPath = keyName.split(":").slice(1);
   let target = json;
   for (let key of keyPath) {
     target = target[key];
   }
 
-  postMessage({
-    isValid: true,
-    json: getInRange(target, keyName),
-    fileName,
-    keyName,
-  });
+  if (target) {
+    postMessage({
+        isValid: true,
+        json: getInRange(target, keyName),
+        fileName,
+        keyName,
+    });
+ }
 }
 
-const getInRange = (json, keyName) => {
+function getInRange(json, keyName) {
   if (!objects_pages[keyName]) objects_pages[keyName] = 0;
 
   const start = objects_pages[keyName] * objects_per_page;

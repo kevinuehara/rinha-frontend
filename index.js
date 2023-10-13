@@ -6,7 +6,7 @@ const loader = document.getElementById("loader");
 const output = document.getElementById("output");
 const more = document.getElementById("more");
 
-const worker = new Worker("./worker.js");
+const worker = new Worker("./worker.min.js");
 
 document.getElementById("file").addEventListener("change", (e) => {
   loader.style.display = 'block';
