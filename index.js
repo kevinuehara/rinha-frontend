@@ -27,6 +27,7 @@ const handleMessage = (data) => {
   const { isValid, json, fileName, keyName } = data;
 
   if (!isValid) {
+    loader.style.display = 'none';
     errorMessage.style.display = "block";
     errorMessage.textContent = "Invalid file. Please load a valid JSON file.";
     return;
@@ -61,7 +62,7 @@ const handleMessage = (data) => {
 const observerIntersection = new IntersectionObserver((entries) => {
   if (entries[0].isIntersecting) {
     worker.postMessage({
-      type: "more",
+      type: "load-more",
     });
   }
 });
@@ -127,7 +128,7 @@ const createLoadMoreButton = (keyName) => {
     const keyName = e.target.dataset.keyName;
 
     worker.postMessage({
-      type: "more",
+      type: "load-more",
       keyName,
     });
   });

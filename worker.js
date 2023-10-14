@@ -10,7 +10,7 @@ onmessage = ({ data }) => {
     load(data.file);
   }
 
-  if (data.type === "more") {
+  if (data.type === "load-more") {
     next(data.keyName);
   }
 };

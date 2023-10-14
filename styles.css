@@ -54,3 +54,41 @@ body {
     color: red;
     display: none;
 }
+
+#title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#output {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+li > ul {
+    padding-left: 1rem;
+    position: relative;
+  }
+  
+  li > ul::before {
+    content: "";
+    border-left: 1px solid #bfbfbf;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0.125rem;
+  }
+  
+  span.key {
+    color: #4e9590;
+    padding-right: 0.5rem;
+  }
